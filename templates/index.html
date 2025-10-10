@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TerraGuess</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
+<body>
+
+<div id="street-view"></div>
+<div id="guess-map"></div>
+
+<div id="guess-modal" class="hidden">
+  <div id="guess-modal-content">
+    <p id="guess-feedback"></p>
+    <button id="guess-refresh">Play Again</button>
+  </div>
+</div>
+
+<script>
+    const streetViewConfig = {
+        actualLat: {{ lat }},
+        actualLng: {{ lng }},
+        fallbackLat: {{ fallback_lat }},
+        fallbackLng: {{ fallback_lng }},
+        radius: {{ radius }},
+        apiKey: "{{ API_KEY }}"
+    };
+</script>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script async src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}&callback=initStreetView" defer></script>
+
+<script src="{{ url_for('static', path='script.js') }}"></script>
+
+</body>
+</html>
