@@ -17,11 +17,17 @@ with open("data/global_cities.json") as f:
 
 @app.get("/")
 async def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {
+        "request": request
+    })
+
+@app.get("/singleplayer")
+async def singleplayer(request: Request):
     coord = random.choice(CITIES)
     fallback = random.choice(fallback_coords)
     lat, lng = coord["lat"], coord["lng"]
 
-    return templates.TemplateResponse("index.html", {
+    return templates.TemplateResponse("singleplayer.html", {
         "request": request,
         "API_KEY": os.getenv("GOOGLE_MAP_API"),
         "lat": lat,
